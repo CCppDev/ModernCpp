@@ -5,16 +5,18 @@ using namespace std;
 // 闭包
 // & 引用
 // = 复制产生复本 const mutable
-
+int global = 10;
 int main() {
     int x = 100, y = 200;
     auto f = [&x,y]() mutable {
         x = 50;
-        y = 50;
+        global = 100;
+        y = 50; // Cannot assign to a variable captured by copy in a non-mutable lambda
         cout << x << " : " << y << endl;
     };
     f();
     cout << x << " : " << y << endl;
+    cout << global << endl;
     return 0;
 }
 
